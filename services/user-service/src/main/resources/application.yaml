@@ -1,0 +1,7 @@
+server:
+  port: ${USER_SERVICE_PORT:10010}
+spring:
+  application:
+    name: user-service
+  config:
+    import: optional:file:./docker/.env[.properties]
