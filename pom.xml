@@ -37,34 +37,23 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Checkstyle Plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>${checkstyle.version}</version>
-                        </dependency>
-                    </dependencies>
                     <configuration>
-                        <!-- Используем стандартные правила Google или Sun -->
-                        <configLocation>google_checks.xml</configLocation>
-                        <!-- Альтернативно можете создать свой файл: -->
-                        <!-- <configLocation>checkstyle.xml</configLocation> -->
+                        <configLocation>checkstyle.xml</configLocation>
                         <encoding>UTF-8</encoding>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
                         <linkXRef>false</linkXRef>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <!-- Исключаем generated файлы -->
                         <excludes>**/target/**/*,**/generated-sources/**/*</excludes>
+                        <outputFile>target/checkstyle/checkstyle-report.xml</outputFile>
                     </configuration>
                     <executions>
                         <execution>
-                            <id>validate</id>
+                            <id>checkstyle</id>
                             <phase>validate</phase>
                             <goals>
                                 <goal>check</goal>
@@ -72,8 +61,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                <!-- Surefire Plugin для тестов -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -83,8 +70,6 @@
                         <testFailureIgnore>false</testFailureIgnore>
                     </configuration>
                 </plugin>
-
-                <!-- Compiler Plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
